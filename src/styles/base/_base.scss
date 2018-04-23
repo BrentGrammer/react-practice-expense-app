@@ -1,0 +1,28 @@
+// Theme site wide styling
+
+// Needed to be set for react-dates components to show correctly:
+*, *:before, *:after {
+    box-sizing: border-box;
+  }  
+
+html {
+    font-size: 62.5%; /* this makes 1rem = 10px instead of 16px */
+}
+
+body {
+    background: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;   
+}
+
+button {
+    cursor: pointer; //sets cursor to the hand when hovering over all buttons
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    font-weight: bold;
+}
