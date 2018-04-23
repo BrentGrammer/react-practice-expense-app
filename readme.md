@@ -75,12 +75,12 @@ JSX:
 
 ```text
 <h1> = lowercase tag will render HTML element
-
+```
 Supports/accepts:
 -Strings
 -Numbers
 -Arrays (can only contain JSX(typical), or strings/nums/arrays - booleans/null/undefined ignored - Objects not accepted. If containing JSX, each item needs a unique key attribute)
--JSX ( JSX inside JSX i.e. { {<h1>This is JSX</h1} } )
+-JSX ( JSX inside JSX i.e. ```text { {<h1>This is JSX</h1} } )```text
 
 IGNORES (can still be used with no error, nothing rendered):
 -Booleans, NULL, undefined
