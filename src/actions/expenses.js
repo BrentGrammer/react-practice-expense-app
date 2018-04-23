@@ -1,5 +1,5 @@
 // import the default export from firebase/firebase.js which is the variable holding firebase.database() used to 
-// access the database.
+// access the database.  
 import database from '../firebase/firebase';
 
 // These action generators return the thing that is dispatched to the store/reducers (normally it is an object)
