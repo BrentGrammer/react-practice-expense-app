@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 module.exports = (env) => {
-  console.log(env);
+  //console.log(env);
   // for using mini-css-extract-plugin for separating css from bundle.js to define the filename in plugins to extract css to:
   const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
   // this will check if env was set to production by running npm run build:prod which is webpack with -p --env production flag:
