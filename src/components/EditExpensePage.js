@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { editExpense, removeExpense, startRemoveExpense } from '../actions/expenses';
+import { startRemoveExpense, startEditExpense } from '../actions/expenses';
 
 // This page is routed to and rendered when user clicks <Link> which is mapped to /edit/:expenseId in the router.
 // the <Link> is inside <ExpenseListItem> displayed in the <ExpenseList> on <ExpensesDashBoardPage>
@@ -21,10 +21,14 @@ const EditExpensePage = (props) => (
                // the expense object is dispatched to the expense reducer listening for edit expense action
 
                // Edit Expense Page is giving the form child a onSubmit function which the child form calls when the form 
-               // is submitted and passes in the form data from it's local state as the argument.
-               // The function disatches the passed in form data to the store to update the item:
-                
-               props.dispatch(editExpense(props.expense.id, expense));
+               // is submitted and passes in the form data from it's local state as the argument into onSubmit which is
+               // then passed into editExpense in the dispatch call.
+               // The function disatches the passed in form data to the store to update the item.
+               // The expense id is coming from the connection to the store and pulling a matched id with the url param
+               // which this component then has access to in props: 
+               // the expense object is used to overwrite props on the state expense obj in the reducer which spreads them
+               // out on the state object.
+               props.dispatch(startEditExpense(props.expense.id, expense));
                props.history.push('/');
            }}
        />

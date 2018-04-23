@@ -43,7 +43,9 @@ export const startAddExpense = (expenseData = {}) => {
         // by giving it to the addExpense action generator call:
         // note: ref in the .then arg callback is the snapshot returned by push which is the data that was pushed,
         // so to get the id key assigned by push of the entry, you can access it with .key (ref.key):
-        // (returning this line enables the chaining of more promises/then()s to it)
+        // (returning this line enables the chaining of more promises/then()s to it)\
+        // Note: ref arg in the then callback is referring to the expense added to the ref or reference?? it's the same as
+        // snapshot maybe - access to the item that was added/updated
         return database.ref('expenses').push(expense).then((ref) => {
             // After the push to store the expense in firebase is complete, dispatch the action generator above, 
             // with the object holding the assigned data which was inserted into the database, which updates the store:
@@ -55,11 +57,23 @@ export const startAddExpense = (expenseData = {}) => {
     };
 };
 
+// updates arg is an object with expense properties/values from the form on EditExpensePage and passed in by startEditExpense.
+// The updates object is sent to the reducer which spreads them out to overwrite the expense object props in the state.
 export const editExpense = (id, updates) => ({
     type: 'EDIT_EXPENSE',
     id,
     updates
 });
+// updates arg is an object with expense properties/values from the form on EditExpensePage.
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).update({
+            updates // updates already an object, no need to spread...
+        }).then(() => {
+            dispatch(editExpense(id, updates));
+        });       
+    };
+};
 
 // return an action object with the passed in id (passed in as an object) of the expense to remove
 export const removeExpense = ({ id } = {}) => ({ 
