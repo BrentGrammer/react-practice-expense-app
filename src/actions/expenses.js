@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 // import the default export from firebase/firebase.js which is the variable holding firebase.database() used to 
 // access the database.
 import database from '../firebase/firebase';
