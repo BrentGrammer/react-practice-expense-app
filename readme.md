@@ -73,6 +73,7 @@ JSX:
 
 <User /> = Uppercase starting tag will render an in-scope variable (i.e. a const User function or User component class)
 
+```text
 <h1> = lowercase tag will render HTML element
 
 Supports/accepts:
