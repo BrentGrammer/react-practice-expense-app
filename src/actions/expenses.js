@@ -13,7 +13,7 @@ export const addExpense = (expense) => ({
     expense
 });
 
-/** startAddExpense starts the process of addExpense above:
+/** startAddExpense starts the process of addExpense above - it is called on AddExpensePage:
  * This will update the database, wait for it to correctly sync, and then dispatch the action above to update the store.
  *** This Asynchronous Redux Action generator returns a function instead of an object - made poss. via the middleware 
  *   redux-thunk ***
@@ -67,14 +67,22 @@ export const removeExpense = ({ id } = {}) => ({
     type: 'REMOVE_EXPENSE', 
     id 
 });
+// Async Redux Function accepts an object passed in containing the expense's id from <EditExpensePage>
+export const startRemoveExpense = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).remove().then(() =>{
+            dispatch(removeExpense({ id }));
+        });       
+    };
+}; 
 
 /**
  * FETCHING AND SETTING PERSISTENT DATA FROM DB
+ * This Async Redux Func is called on the main app.js file to initially set expenses in the store and sync it with
+ * the database.
  */
 
-// SET_EXPENSES Action to update store and set all expenses (dispatched by the async redux action startSetExpenses 
-// below it) 
-// Sets the array gotten back from Firebase and passed in to it to the expenses in the store:
+// Sets the array gotten back from Firebase, in startSetExpenses and passed in to it, to the expenses in the store:
 export const setExpenses = (expenses) => ({
     type: 'SET_EXPENSES',
     expenses

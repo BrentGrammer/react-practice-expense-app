@@ -4,33 +4,7 @@ import numeral from 'numeral';
 import selectExpenses from '../selectors/expenses';
 import selectExpensesTotal from '../selectors/expenses-total';
 
-
-// // this component is called on the ExpenseDashboardPage parent:
-// const ExpensesSummary = (props) => (
-//     <div>
-//         <h1>Expenses Summary: </h1>
-//         <p>Total Expenses: {props.expenses.length}</p>
-//         {/* Grab the total from the selector return value passed in the props with mapStateToProps and format it with numeral.js: */}
-//         <p>Total sum: {numeral(props.expenses_total/ 100).format('$0,0.00')}</p>       
-//     </div>
-// );
-// // This defines what the component has access to in the store and passes the key/values as props to the component 
-// // (props on the component connected will = the state object with the key/values specified here).
-// const mapStateToProps = (state) => {
-//     return {   
-           // // assign a const to the filtered list of expenses by using the expenses selector with the filters passed in:
-           // const visibleExpenses = selectExpenses(state.expenses, state.filters);   
-//         // expenses is set to use the selector which uses .filter() to filter returned expenses based on the state.filters props
-//         expenses: selectExpenses(state.expenses, state.filters),
-//         // use the filtered expenses pulled with the expenses selector assigned to the const above:
-//         expenses_total: selectExpensesTotal(visibleExpenses)
-//     };
-// };
-// // connect() returns the function to use to make the HOC, so pass in the comp to the second call which would be calling
-// // the returned function.
-// export default connect(mapStateToProps)(ExpensesSummary);
-
-
+// NOTE: this component is called on the ExpenseDashboardPage parent:
 
 //////// Andrew Mead's Way /////////
 
@@ -57,3 +31,27 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(ExpensesSummary);
+
+// const ExpensesSummary = (props) => (
+//     <div>
+//         <h1>Expenses Summary: </h1>
+//         <p>Total Expenses: {props.expenses.length}</p>
+//         {/* Grab the total from the selector return value passed in the props with mapStateToProps and format it with numeral.js: */}
+//         <p>Total sum: {numeral(props.expenses_total/ 100).format('$0,0.00')}</p>       
+//     </div>
+// );
+// // This defines what the component has access to in the store and passes the key/values as props to the component 
+// // (props on the component connected will = the state object with the key/values specified here).
+// const mapStateToProps = (state) => {
+//     return {   
+           // // assign a const to the filtered list of expenses by using the expenses selector with the filters passed in:
+           // const visibleExpenses = selectExpenses(state.expenses, state.filters);   
+//         // expenses is set to use the selector which uses .filter() to filter returned expenses based on the state.filters props
+//         expenses: selectExpenses(state.expenses, state.filters),
+//         // use the filtered expenses pulled with the expenses selector assigned to the const above:
+//         expenses_total: selectExpensesTotal(visibleExpenses)
+//     };
+// };
+// // connect() returns the function to use to make the HOC, so pass in the comp to the second call which would be calling
+// // the returned function.
+// export default connect(mapStateToProps)(ExpensesSummary);

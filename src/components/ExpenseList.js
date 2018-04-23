@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
 
+// Parent is ExpensesDashboardPage
+
 // ExpenseList is getting props from the connect to the store (grabs expenses using the selector to query the state
 // from the store to grab items based on filters set on the ExpenseDashboard using the ExpenseListFilters child instance
 // which dispatches filter actions to the filters reducer to set them in the store state - )

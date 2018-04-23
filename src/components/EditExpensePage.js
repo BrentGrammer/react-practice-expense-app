@@ -1,7 +1,10 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { editExpense, removeExpense } from '../actions/expenses';
+import { editExpense, removeExpense, startRemoveExpense } from '../actions/expenses';
+
+// This page is routed to and rendered when user clicks <Link> which is mapped to /edit/:expenseId in the router.
+// the <Link> is inside <ExpenseListItem> displayed in the <ExpenseList> on <ExpensesDashBoardPage>
 
 const EditExpensePage = (props) => (
     <div>
@@ -26,17 +29,25 @@ const EditExpensePage = (props) => (
            }}
        />
        <button onClick={() => {
-          props.dispatch(removeExpense({ id: props.expense.id }));
+          props.dispatch(startRemoveExpense({ id: props.expense.id }));
           props.history.push('/');
         }}
        >Remove</button>
     </div>
 );
 
-// search the expenses in state for an id that matches
-// access the current props in the component in the second argument passed in to grab the id to search for.
-// the id is got from the expense list item link to this page which is accessed with the match.params from the dynamic
+// Search the expenses in global store state for an id that matches.
+// Access the current props in the component in the second argument passed in to grab the id to search for.
+// the id is got from the expense list item link to this page which is accessed with the props.match.params from the dynamic
 // url (this is builtin functionality provided by react router)
+
+/** 
+ * The url param id is set by <ExpenseList> passing id to ExpenseListItem where that puts it into the Link url 
+ * as the url id param, which when clicked, renders this component and is accessible in the builtin props.match.params.
+ * Then, this connected component to the store uses it to find a match with an expense in the store and put that match 
+ * in it's props where it can use it to pass to the async redux action generator dispatched that updates the db and 
+ * store.
+ */
 const mapStateToProps = (state, props) => {
     return {
         expense: state.expenses.find((expense) => expense.id === props.match.params.id)

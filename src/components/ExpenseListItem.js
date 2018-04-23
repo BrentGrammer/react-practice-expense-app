@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
 
+// Parent is ExpenseList (whose Parent is ExpenseDashBoardPage) -user clicks on expense in dashboard page
+
 // the props are passed in from ExpenseList as the expense object, and then it is destructured to pull data into 
 // variables:
  const ExpenseListItem =  ({ id, description, amount, createdAt }) => (
