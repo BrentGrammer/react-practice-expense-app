@@ -11,6 +11,7 @@ import LoginPage from '../components/LoginPage';
 import NotFoundPage from '../components/NotFoundPage';
 // this is for making private routes only accessible when user is logged in:
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 // npm history tool installed lets you create your own custom history with createHistory() and then you can export it to 
 // use outside of routed components:
@@ -25,7 +26,7 @@ export const history = createHistory();
     <Router history={history}>
        <div>
          <Switch>
-           <Route path="/" component={LoginPage} exact={true} />
+           <PublicRoute path="/" component={LoginPage} exact={true} />
            <PrivateRoute path="/dashboard" component={ExpenseDashboardPage} />
            <PrivateRoute path="/create" component={AddExpensePage} />
            <PrivateRoute path="/edit/:id" component={EditExpensePage} />

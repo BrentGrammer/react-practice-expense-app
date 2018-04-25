@@ -7,7 +7,7 @@ import Header from '../components/Header';
 // Destructure the props from mapStateToProps and from those passed in on AppRouter.js.  Since the component will
 // be a capital letter at the start, you can set the variable name to hold the value of the component prop to a name with
 // a capital letter.
-// the ...rest operator takes all of the other props not destructured (like exact, builtin props provided by ReactRouter etc.)
+// the ...rest operator takes all of the other props not destructured (like path, exact, builtin props provided by ReactRouter etc.)
 // and puts them all in a variable called rest.
 export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
     //make instance of <Route /> and pass in the rest props (from AppRouter.js) and define the component prop separately

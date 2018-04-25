@@ -22,7 +22,12 @@ export const addExpense = (expense) => ({
 export const startAddExpense = (expenseData = {}) => {
     // function called internally by redux with dispatch builtin as an arg to grant access to the dispatch() method
     // which can be used after updating/working with the database in .then() callback.
-    return (dispatch) => {
+    
+    return (dispatch, getState) => {
+        // Note: getState is builtin func passed in by redux-thunk - can access current state and grab user uid from auth.uid
+        // to use with associating private database data. getState returns the state object, then you can access props on it:
+        // getting user id to associate private database data with:
+        const uid = getState().auth.uid;
         // this is desctructuring the passed in expenseName obj with values from the form which is passed in on the 
         // parent component containing the form and dispatching this action generator.
         // (defaults are also set in case there is no form data send for the values)
@@ -46,7 +51,7 @@ export const startAddExpense = (expenseData = {}) => {
         // (returning this line enables the chaining of more promises/then()s to it)\
         // Note: ref arg in the then callback is referring to the expense added to the ref or reference?? it's the same as
         // snapshot maybe - access to the item that was added/updated
-        return database.ref('expenses').push(expense).then((ref) => {
+        return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             // After the push to store the expense in firebase is complete, dispatch the action generator above, 
             // with the object holding the assigned data which was inserted into the database, which updates the store:
             dispatch(addExpense({ 
@@ -66,12 +71,13 @@ export const editExpense = (id, updates) => ({
 });
 // updates arg is an object with expense properties/values from the form on EditExpensePage.
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-        return database.ref(`expenses/${id}`).update({
-            updates // updates already an object, no need to spread...
-        }).then(() => {
-            dispatch(editExpense(id, updates));
-        });       
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        // updates object is {description, amount, createdAt, note} from expense form on EditExpensePage
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates) // updates already an object, no need to spread...
+           .then(() => {
+              dispatch(editExpense(id, updates));
+            });       
     };
 };
 
@@ -82,8 +88,9 @@ export const removeExpense = ({ id } = {}) => ({
 });
 // Async Redux Function accepts an object passed in containing the expense's id from <EditExpensePage>
 export const startRemoveExpense = ({ id } = {}) => {
-    return (dispatch) => {
-        return database.ref(`expenses/${id}`).remove().then(() =>{
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`).remove().then(() =>{
             dispatch(removeExpense({ id }));
         });       
     };
@@ -105,11 +112,14 @@ export const setExpenses = (expenses) => ({
 export const startSetExpenses = () => {
    // return a function called automatically by redux when this async redux action is called on the home page
    // with access to dispatch:
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        //user id is set by firebase.auth on app.js
+        const uid = getState().auth.uid; 
           // get expenses from the database, convert to an array, then dispatch setExpenses with it to the store:
           // use return to return the promise so you can chain on .then in app.js to render the page when this completes
-        return database.ref('expenses').once('value').then((snapshot) => {
+        return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
             const expenses = [];
+            // go through each expense in the expenses object and push it to the expenses array to send with setExpenses dispatch to put them in the store.
             snapshot.forEach((childSnapshot) => {
                 expenses.push({
                     id: childSnapshot.key,

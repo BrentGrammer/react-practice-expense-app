@@ -54,8 +54,8 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
     // check if there is a user set on auth state change and logged in (user will not be null)
     if (user) {
-        //console.log('user', user.uid); // user unique id provided by auth is stored in user.uid - this will be tracked in redux store to track authentication for page access.
-
+        //console.log('user', user.uid); // unique user id provided by auth is stored in user.uid - this will be tracked in redux store to track authentication for page access.
+        // user.uid is created when user clicks login btn on Loginpage which fires startLogin action in actions/auth.js, and firebase.auth signs them in with google, then the id is stored in the store with the login action fired by startLogin
         // After user is logged in (user will have a value), dispatch the login action which sends user.uid to the store
         // to keep track of it for accessing private protected routes in the app while logged in:
         store.dispatch(login(user.uid));
