@@ -17,10 +17,13 @@ firebase.initializeApp(config);
 
 // set the database method to contact database to a const so you don't have to type it out all the time:
 const database = firebase.database();
+// Set up an instance of a authentication Provider (using Google here):
+// This is exported and used in \src\actions\auth\startLogin action generator with signInWithPopup() for ex.
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 //export firebase (as named export) and the database variable (as default) so other components can access it if 
 //need be:
-export { firebase, database as default };
+export { firebase, googleAuthProvider, database as default };
 
 
 
