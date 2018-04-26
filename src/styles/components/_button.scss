@@ -1,0 +1,23 @@
+// styling for buttons (i.e. login button on loginpage):
+.button {
+    background: $blue;
+    border: none;
+    color: white;
+    display: inline-block; //**This is set to allow changing top/bottom margin and padding.  Link elements are inline by default and you can't change the top/bot margin/padding without changing their display to inline-block or block.
+    font-weight: 300; // note using fixed width and height disabled this rule...stick with padding and font-size to manipulate button size instead.
+    font-size: $font-size-large;
+    line-height: 1; // eliminate extra height of the line in button text to make button more compact vertically.
+    padding: $s-size;
+    text-decoration: none; // removes underline from button links.
+}
+
+// logout button on Header.js:
+// Note: this is a modifier that overwrites rules on the base class button above.  It is named with the baseClass--modifier BEM naming convention and both classes are assigned to the element.
+.button--link {
+    color: white;
+    background: none;
+}
+// this modifier changes the color of the button to grey:
+.button--secondary {
+    background: #888; //equivalent shorthand for #888888;
+}

@@ -32,7 +32,10 @@ module.exports = (env) => {
   const isProduction = env === 'production';
 
    return {
-    entry: './src/app.js',
+     // Entry point can be a string or an array of strings.  Use an array of strings to add Babel Polyfill functionality 
+     // which compiles modern array methods like include to work on older browsers like internet explorer 11.
+     // Add Babel-polyfill as the first item in the array to use:
+    entry: ['babel-polyfill','./src/app.js'],
     output: {
       // specifies where the bundle files built with webpack are dumped.
       // put the files in a /dist/ subfolder so they are easier to find and work with on the server:

@@ -1,0 +1,24 @@
+// aligns menu inputs on ExpenseListFilters.js horizontally:
+
+// targets the container div for the menu items:
+.input-group {
+    //vertically aligns items, adjusts height of buttons, etc.:
+    align-items: center;
+    flex-direction: column; // aligns items vertically for mobile-first design.  See media query for horizontal desktop rules.
+    display: flex; // makes child menu item divs align left to right instead of vertically.
+    margin-bottom: $m-size; // set smaller margin bot for smaller mobile screens to save space.
+
+    // *Set rules for larger screens here with minwidth - mobile-first design pattern.
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: row; // overwrite column setting above for mobile screens to align items left-to-right on desktop screens.
+        margin-bottom: $l-size; // put some space b/w menu item bar and content below.
+    }
+}
+// targets div containing each menu item:
+.input-group__item {
+    margin-bottom: $s-size; // put a little space between stacked items in mobile screens.
+    // For desktop screens:
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0 $s-size 0 0; //remove bottom margin set by mobile first rule and set small margin on right to put space between aligned menu items
+    }
+}

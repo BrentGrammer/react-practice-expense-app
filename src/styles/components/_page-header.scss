@@ -1,0 +1,22 @@
+// This is a header for page specific information unlike the _header.scss which is for the header for all pages.
+// Note: the width of the content is not contained so that the background color goes across the whole screen.  
+// _content-container.scss is used to contain the content in a separate div so that the background of headers can stretch across entire screen.
+.page-header {
+    background: $off-white;
+    margin-bottom: $l-size;
+    padding: $l-size 0; // allow content container css to set padding on left and right.   
+}
+
+// targets div containing interactive actions (i.e. buttons, etc.) on the ExpensesSummary component page header.
+.page-header__actions {
+    margin-top: $m-size; // create space b/w btn and h1
+}
+
+.page-header__title {
+    font-weight: 300; // makes h1 have a thinner font to juxtapose with the dynamic data (set with spans to be more bold)
+    margin: 0; // clear margin so remove extra space around h1 - just use the space settings set above in the header
+    // target spans in the h1 to make the dynamic data bold in contrast to the rest of the text:
+    span {
+        font-weight: bold;
+    }
+}

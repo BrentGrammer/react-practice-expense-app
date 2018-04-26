@@ -17,10 +17,21 @@ export class AddExpensePage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Add Expense</h1>
-        <ExpenseForm
-          onSubmit={this.onSubmit}
-        />
+        {/* using the content container inside the page header div makes the content be centered while 
+            allowing the background color of page-header to extend the full width of the screen */}
+        <div className="page-header">
+        {/* Adding the content container class allows for proper centering of the h1 title */}
+          <div className="content-container">
+            <h1 className="page-header__title">Add Expense</h1>
+          </div>
+        </div>  
+        {/* content-container div used to restrict width and keep form elements from stretching entire width of page on 
+            mobile screen */}
+        <div className="content-container"> 
+           <ExpenseForm
+             onSubmit={this.onSubmit}
+           />
+        </div>
       </div>
     );
   }

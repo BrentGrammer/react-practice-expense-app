@@ -1,0 +1,18 @@
+// targets form el on ExpenseForm.js:
+.form {
+    //set up for mobile first stacking the form elements top to bottom with flexbox:
+    display: flex;
+    flex-direction: column;
+    // style all children in form on ExpenseForm.js with > *:
+    > * {
+        // all children elements of form will have space on the bottom b/w the next form input:
+        margin-bottom: $m-size;
+    }
+    // Note the button on ExpenseForm.js was moved outside of the <form> container so that it will not be set
+    // to full width by flexbox and look like a normal sized button instead of stretching across the screen.
+}
+// style the error messages <p> in FormExpense.js
+.form__error {
+    margin: 0 0 $m-size 0; // clear margins on all sides except bottom 
+    font-style: italic;
+}   

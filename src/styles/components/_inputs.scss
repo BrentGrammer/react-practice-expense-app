@@ -1,0 +1,24 @@
+// styling for all inputs - note: do not use generic selectors (i.e. input), but make a class and use that so you don't overwrite
+// styling for 3rd party imported components that use inputs and have styles set for them.
+.text-input {
+    // set up border to match border of React Dates cal:
+    border: 1px solid #cacccd;
+    height: 50px; // makes the menu input match vertical size of the react dats cal input.
+    font-size: $font-size-large; // increases size of text entered by user in input box.
+    font-weight: 300;
+    padding: $s-size; // little bit of padding for space between text and border of text box in input.
+}
+
+// for select dropdowns:
+.select {
+    // inherit rules from .text-input above using sass @extend keyword:
+    // you can now add rules if you want or not.
+    @extend .text-input;
+}
+
+// text-area input on ExpenseForm.js:
+.text-area {
+    @extend .text-input;
+    //override specific text-input rules for text-area:
+    height: 10rem;
+}

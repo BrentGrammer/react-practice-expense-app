@@ -1,0 +1,12 @@
+.loader {
+    align-items: center; // center the loader vertically
+    display: flex;
+    height: 100vh; // makes the container div take up all the height (used to allow for centering the img in the middle of the screen)
+    justify-content: center; // center the loader horizontally.
+    width: 100vw;  // makes container div take all the width of screen (just the container, not the img)
+}
+// target img loader and change it's size:
+.loader__img {
+    height: 6rem;  //these make it smaller.
+    width: 6rem;
+}

@@ -6,9 +6,13 @@ import { startLogin } from '../actions/auth';
 // arg is destructuring the props passed in by connect() mapDispatchToProps to get access to the startLogin action 
 // which is used in the onClick for the login button:
 export const LoginPage = ({ startLogin }) => (
-    <div>
-{/* onClick is referencing the destructured dispatch prop setup with mapDispatchToProps to fire the startLogin action: */}
-       <button onClick={startLogin}>Login</button> 
+    <div className="box-layout">
+       <div className="box-layout__box">
+          <h1 className="box-layout__title">ExpenseApp Title</h1>
+          <p>Tagline for the app.</p>
+        {/* onClick is referencing the destructured dispatch prop setup with mapDispatchToProps to fire the startLogin action: */}
+          <button className="button" onClick={startLogin}>Login with Google</button> 
+       </div>
     </div>
 );
 

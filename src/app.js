@@ -12,6 +12,7 @@ import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css'; // lives in node_modules/ folder so no need to reference the folder - import looks automatically there
 import './styles/styles.scss';
 import { firebase } from './firebase/firebase';
+import LoadingPage from './components/LoadingPage';
 
 import './firebase/firebase';
 
@@ -45,8 +46,8 @@ const renderApp = () => {
     }
 };
 
-// Render a loading page while the action startSetExpenses is fetching data from db:
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+// Render a loading page while the action startSetExpenses is fetching data from db which uses a gif spinner icon:
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // onAuthStateChanged runs callback when authentication status changed (authenticated to unauthenticated or vice versa):
 // if there is a user it is passed in as the arg

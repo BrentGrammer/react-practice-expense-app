@@ -1,0 +1,9 @@
+// This partial is reused to center, contain and restrain the width of contents in various components in the app:
+// (used in AddExpensePage by wrapping the form in a div to keep form elements in ExpenseForm from stretching across whole page in mobile, for ex)
+.content-container {
+    // make sure that if the browser or viewport is larger than 80rem, there is equal space on either side:
+    margin: 0 auto; // auto evenly distributes extra space on the left and right.
+    max-width: 80rem;
+    // set padding on just left and right to ensure content never pushes against the edge of browser:
+    padding: $m-size;
+}

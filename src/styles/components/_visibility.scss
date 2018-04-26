@@ -1,0 +1,17 @@
+// This file manages displaying of various divs depending if the screen is mobile or larger:
+// classes are used in ExpenseList.js
+.show-for-mobile {
+    // if the width is or larger than the desktop size set in \base\_settings.scss, then hide the mobile screen divs:
+   @media (min-width: $desktop-breakpoint) {
+    display: none;
+   } 
+}
+
+.show-for-desktop {
+    // the selected divs will only be hidden if the width is smaller than the desktop breakpoint.
+    // max-width = the maximum width that these rules will be applied to.  Any width larger than that, the rules will not apply.
+    // ** Subtract a small amount from the max-width so that the rules can't accidentally apply at the same time.
+    @media (max-width: $desktop-breakpoint - .01rem) {
+        display: none;
+    }
+}

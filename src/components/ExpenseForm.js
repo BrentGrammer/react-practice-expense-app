@@ -85,21 +85,23 @@ class ExpenseForm extends React.Component {
         }
     };
     render () {
-        return (
-            <div>
-               {this.state.error && <p>{this.state.error}</p>}
-               <form onSubmit={this.onSubmit}>
+        return (         
+           // root element container is a <form> which is valid (does not have to be a <div>)
+               <form className="form" onSubmit={this.onSubmit}>
+                  {this.state.error && <p className="form__error">{this.state.error}</p>}
                   <input 
                     type="text"
                     placeholder="Description"
                     // puts the cursor in the field when user visits page
                     autoFocus
+                    className="text-input"
                     value={this.state.description}
                     onChange={this.onDescriptionChange}
                   />
                   <input 
                     type="number"
-                    placeholder="amount"
+                    placeholder="Amount"
+                    className="text-input"
                     value={this.state.amount}
                     onChange={this.onAmountChange}
                   />
@@ -113,13 +115,17 @@ class ExpenseForm extends React.Component {
                   />
                   <textarea
                      placeholder="Note for Expense (optional)"
+                     className="text-area"
                      value={this.state.note}
                      onChange={this.onNoteChange}
                   >               
                   </textarea>
-                  <button>Add Expense</button>
-               </form>
-            </div>
+                  {/* The button is put in a div so it is not a direct child of <form> and won't be affected by the display: flex; rule in 
+                      on _form.scss and won't stretch across the screen */}
+                  <div>
+                    <button className="button">Save Expense</button>
+                  </div>
+               </form>  
         );
     }
 }

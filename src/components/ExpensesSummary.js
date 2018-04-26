@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import numeral from 'numeral';
 import selectExpenses from '../selectors/expenses';
 import selectExpensesTotal from '../selectors/expenses-total';
@@ -14,8 +15,16 @@ export const ExpensesSummary = ({ expenseCount, expensesTotal }) => {
     // format expenses total with numeral (total is in int cents so /100 to get dollars):
     const formattedExpensesTotal = numeral(expensesTotal / 100).format('$0,0.00');
     return (
-        <div>
-            <h1>Viewing {expenseCount} {expenseWord} totalling {formattedExpensesTotal}</h1>           
+        <div className="page-header">
+           <div className="content-container">
+              {/* spans added around dynamic data to target for making bold in _page-header.scss */}
+              <h1 className="page-header__title">Viewing <span>{expenseCount}</span> {expenseWord} totalling <span>{formattedExpensesTotal}</span></h1>
+              {/* div added to hold link to create expense and create space between it and the h1 and whatever else you want to include */}
+              {/* class name actions is naming convention for using with the interactive actions for the page */}
+              <div className="page-header__actions">
+                 <Link className="button" to="/create">Add Expense</Link>
+              </div>
+           </div>                 
         </div>
     );
 };

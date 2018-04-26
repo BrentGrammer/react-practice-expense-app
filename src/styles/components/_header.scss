@@ -1,0 +1,25 @@
+.header {
+    background: $blue-dark;
+}
+
+// this targets a div wrapper for the content in the header bar (Header.js) to center and align it left-to-right using flexbox.
+.header__content {
+    //vertically aligns items:
+    align-items: center;
+    // this lines up content in header bar left-to-right
+    display: flex;
+    // this spreads the elements in header bar out on left and right edge and puts the leftover space in between them.
+    justify-content: space-between;
+    padding: $s-size 0;
+}
+
+.header__title {
+    color: white;
+    // removes the underline for the link:
+    text-decoration: none;
+    // target all h1s inside the header__title element on Header.js:
+    h1 {
+        // clear margin on the h1 title and handle it with padding on the header instead.
+        margin: 0;
+    }
+}

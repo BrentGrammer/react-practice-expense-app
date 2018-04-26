@@ -1,0 +1,77 @@
+// targets and styles the columns header on ExpenseList.js:
+.list-header {
+    background: $off-white;
+    border: 1px solid darken($off-white, 7%); // darkens border color based on background to make a more subtle border.
+    color: $grey;
+    display: flex;
+    justify-content: space-between;
+    padding: $s-size $m-size;
+}
+// targets the expense list body on ExpenseList.js to add margin to the bottom in case screen is made smaller vertically and items don't squish against bottom edge of screen:
+.list-body {
+    margin-bottom: $m-size;
+    // increase the margin bottom for desktop size screens:
+    @media (min-width: $desktop-breakpoint) {
+        margin-bottom: $l-size;
+    }
+}
+
+.list-item {
+    border: 1px solid darken($off-white, 7%);
+    // remove top border so the bottom border of the stacked item doesn't make a 2px border on the top.
+    border-top: none;
+    color: $grey-dark; // This stops the color of the link from being blue/purple if clicked and keeps it one color.
+    display: flex;
+    flex-direction: column; // set for mobile to stack expense items vertically
+    padding: $s-size; // puts space in bw items in box so they aren't up against the edges.
+    text-decoration: none; //removes underline from link
+    // fade in background color (transition takes three things: [css prop] [time in secs] [function];:
+    // *This will be used whenever the specified css prop changes value
+    transition: background .3s ease;
+    // use & to target the list item again:
+    &:hover {
+        background: $off-white;
+    }
+    // set media query to make amount and date align horizontally on larger screens:
+    @media (min-width: $desktop-breakpoint) {
+        align-items: center; // vertically aligns the amounts etc.
+        flex-direction: row;
+        justify-content: space-between; // move the two items to the left and right side of screen putting space in b/w
+        padding: $m-size; // add more padding since screen is larger and can spread things out a bit more.
+    }
+}
+/**
+ * targeting item parts on ExpenseListItem.js (fixing margin issues so items aren't spread out, edge cases like long desc without spaces, etc.):
+ */
+// styles the 'No Expenses' message on dashboard page in ExpenseList.js
+.list-item--message {
+    align-items: center; // center msg vertically
+    $color: $grey;
+    justify-content: center; // center msg horizontally.
+    padding: $m-size; // puts some extra space around msg in the box
+    // override the transition so there is no hover effect to confuse user that there is something to click:
+    &:hover {
+        background: none; // removes any background change on hover.
+    }
+}
+
+ // this is the description of the expense in the list
+.list-item__title {
+    margin: 0;
+    word-break: break-all; // breaks long text without spaces, so that it doesn't overflow and is contained in the box.
+}
+// this targets the data area of the expense list item underneath the description:
+.list-item__sub-title {
+    color: $grey; // lightens the color of the data subtitle
+    font-size: $font-size-small; // make font size smaller for the data subtitle
+
+}
+// targets the amount data on the right of expense list (desktop)
+.list-item__data {
+    // fix margin on mobile screens so there is not too much space on smaller screens around the amount:
+    margin: $s-size 0 0 0; // clears margin on bottom and sides
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0; // clears extra space around the amount in desktop view to make more compact and neat.
+        padding-left: $s-size; // add some left space in the amount box so it isn't right up next to a long description.
+    }
+}

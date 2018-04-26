@@ -1,0 +1,36 @@
+/* used in LoginPage.js component */
+.box-layout {
+    align-items: center; // used with flexbox display: flex/justify-content to center child login box.
+    /* background image: note - the url is relative to the public directory, since browser is using this
+    Ex: '/' is the root of the web server, which is the /public/ folder */
+    background: url('/img/bg.jpg');
+    background-size: cover; // makes the img cover the container if window size changes so it doesn't repeat depending on size of browser window.
+    /* used to center login box child with flexbox: */
+    display: flex;
+    /* manually set background image to take up the browser window: */
+    height: 100vh; // vh=viewport height.  set height to 100% of viewport height.
+    justify-content: center; // used with display:flex/jusify-content: center; to center child login box.
+    width: 100vw; // vw=viewport width. set width of bg img to 100% of viewport width.
+}
+// the box containing the login button, title and tagline centered in the screen:
+.box-layout__box {
+    // fadeout is scss function - takes start color and $amount to fade out (range is 0 to 1):
+    // this makes the box a little transparent so you can barely see the bg img through it.
+    background: fade-out($color: white, $amount: .15);
+    // soften/round off corners of the box
+    border-radius: 3px;
+    // set padding to put space between edge of box and the contents so they aren't squished up against it:
+    padding: $l-size $m-size;
+    // center text inside the box:
+    text-align: center;
+    // set a fixed width for the box (originally it was wider by default, this tightens it up a bit)
+    width: 25rem;
+}
+
+// style the h1 title in the login box on loginpage:
+.box-layout__title {
+    // set margin to 0 on all sides except for bottom to eliminate extra space added onto padding (margin+padding creates more space than just the padding)
+    margin: 0 0 $m-size 0;
+    // line-height puts some space between lines in multiple lines of text in an element:
+    line-height: 1;
+}

@@ -1,6 +1,8 @@
 // Theme site wide styling
 
-// Needed to be set for react-dates components to show correctly:
+// Needed *:before and *:after to be set for react-dates components to show correctly:
+// Also, box sizing eliminates extra padding and margin being added to rules using height:
+// (the default is content-box, which adds padding/border to the height to get the final height).
 *, *:before, *:after {
     box-sizing: border-box;
   }  
@@ -10,9 +12,12 @@ html {
 }
 
 body {
+    // sets font color to a dark grey instead of black - dark-grey is set and defined in the _settings.scss file:
+    color: $grey-dark;
     background: white;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;   
+    line-height: 1.6; // gives some space between paragraphs to look nicer.
 }
 
 button {

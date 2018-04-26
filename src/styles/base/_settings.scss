@@ -1,6 +1,14 @@
+/* This file stores variables to use in the theme site-wide styling - import this file into \styles\styles.scss */
+
 // Colors
-
-
+$grey-dark: #333; // this is #333333 - when all hex nums are same, just 3 nums for the code.
+$grey: #666;
+$blue: #1c88bf;
+$blue-dark: #364051;
+$off-white: #f7f7f7;
+// Font Sizes:
+$font-size-large: 1.8rem;
+$font-size-small: 1.4rem;
 // Spacing
 $s-size: 1.2rem;
 $m-size: 1.6rem;
