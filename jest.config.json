@@ -6,6 +6,6 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "verbose": true,
+    "verbose": "true",
     "testURL": "http://localhost/"
 }
