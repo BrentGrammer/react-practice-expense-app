@@ -1,5 +1,6 @@
 // This file connects to the database and then other files that need the connection can just import this file.
-// import firebase (the * as takes all the named exports from firebase and puts them inside a variable called firebase)
+// import firebase (the * as takes all the named exports from firebase and puts them inside a variable called firebase
+// as props on an object)
 import * as firebase from 'firebase';
 
  // Initialize Firebase (originally copied and pasted from firebase website, but now assigned to the NODE environment

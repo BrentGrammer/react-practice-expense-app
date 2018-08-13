@@ -5,9 +5,10 @@ import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
 
-// these inputs dispatch filter actions to the filters reducer which sets them on the store state
+// these inputs dispatch filter actions to the filters reducer which sets them on the store state, which then this component
+// gets them from the store state and puts them in it's props (through connect(mapStateToProps))
 // This is called and rendered on ExpenseDashboard parent which allows the user to set the filters in store state object
-class ExpenseListFilters extends React.Component {
+export class ExpenseListFilters extends React.Component {
     state = {
         // this value will be null or a string (string if focused on the first or second of the 2 calendars)
         // this just needs to be tracked and passed into the react-dates component below
@@ -15,15 +16,22 @@ class ExpenseListFilters extends React.Component {
     };
     // this method is called by the react-dates library and takes in an object with a start date and an end date
 
-    // When user selects different dates in cal, this grabs selections, and dispatches action to set filters in the 
+    // When user selects different dates in cal, this grabs selections, and dispatches action to set filters in the
     // redux store
     // How is this getting the start and end date passed in - from where?
     onDatesChange = ({  startDate, endDate }) => {
-        this.props.dispatch(setStartDate(startDate));
-        this.props.dispatch(setEndDate(endDate));
+        this.props.setStartDate(startDate);
+        this.props.setEndDate(endDate);
     };
     onFocusChange = (calendarFocused) => {
         this.setState(() => ({ calendarFocused }));
+    };
+    onTextChange = (e) => {
+        this.props.setTextFilter(e.target.value);
+    };
+    onSortChange = (e) => {
+        e.target.value === "date" && this.props.sortByDate();
+        e.target.value === "amount" && this.props.sortByAmount();
     };
     render() {
         return (
@@ -31,40 +39,35 @@ class ExpenseListFilters extends React.Component {
             {/* Create wrapper div for list and for each menu item */}
                <div className="input-group">
                   <div className="input-group__item">
-                    <input 
+                    <input
                         type="text"
-                        className="text-input" 
+                        className="text-input"
                         placeholder="Search Expenses"
-                        value={this.props.filters.text} 
-                        onChange={(e) => {
-                            this.props.dispatch(setTextFilter(e.target.value));
-                        }} 
+                        value={this.props.filters.text}
+                        onChange={this.onTextChange}
                     />
                   </div>
-                  <div className="input-group__item"> 
-                    <select 
+                  <div className="input-group__item">
+                    <select
                         className="select"
                         value={this.props.filters.sortBy}
-                        onChange={(e) => {
-                            e.target.value === "date" && this.props.dispatch(sortByDate());
-                            e.target.value === "amount" && this.props.dispatch(sortByAmount());
-                        }}
+                        onChange={this.onSortChange}
                     >
                       <option value="date">Date</option>
                       <option value="amount">Amount</option>
                     </select></div>
                   <div className="input-group__item">
-                    <DateRangePicker 
+                    <DateRangePicker
                         // accessing the prop set in src\reducers\filters.js through the connect() setup
-                        startDate={this.props.filters.startDate} 
-                        startDateId="start" 
-                        endDate={this.props.filters.endDate} 
+                        startDate={this.props.filters.startDate}
+                        startDateId="start"
+                        endDate={this.props.filters.endDate}
                         endDateId="end"
-                        onDatesChange={this.onDatesChange} 
-                        // grabs tracked value from the local component state
-                        focusedInput={this.state.calendarFocused} 
+                        onDatesChange={this.onDatesChange}
+                        // grabs tracked value from the local component state (can be 'startDate', 'endDate', or null)
+                        focusedInput={this.state.calendarFocused}
                         onFocusChange={this.onFocusChange}
-                        showClearDates={true} 
+                        showClearDates={true}
                         // limits the popup cal to one month
                         numberOfMonths={1}
                         // allows for picking dates in the past
@@ -76,11 +79,17 @@ class ExpenseListFilters extends React.Component {
         );
     }
 };
-// gets filters object from the redux store and sets it to props in the connected component
-const mapStateToProps = (state) => {
-    return {
+// gets filters object from the redux store state and sets it to props in the connected component
+const mapStateToProps = (state) => ({
         filters: state.filters
-    };
-};
+    });
 
-export default connect(mapStateToProps)(ExpenseListFilters);
+const mapDispatchToProps = (dispatch) => ({
+    setTextFilter: (text) => { dispatch(setTextFilter(text)); },
+    sortByDate: () => dispatch(sortByDate()),
+    sortByAmount: () => dispatch(sortByAmount()),
+    setStartDate: (startDate) => dispatch(setStartDate(startDate)),
+    setEndDate: (endDate) => dispatch(setEndDate(endDate))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);

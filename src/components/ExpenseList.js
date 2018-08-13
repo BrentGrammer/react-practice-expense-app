@@ -8,10 +8,11 @@ import selectExpenses from '../selectors/expenses';
 // ExpenseList is getting props from the connect to the store (grabs expenses using the selector to query the state
 // from the store to grab items based on filters set on the ExpenseDashboard using the ExpenseListFilters child instance
 // which dispatches filter actions to the filters reducer to set them in the store state - )
-const ExpenseList = (props) => (
+// Note: the unconnected expense list is exported as a named export for use with jest testing.
+export const ExpenseList = (props) => (
     <div className="content-container">
        <div className="list-header">
-          {/* Expenses div displayed only on mobile screens to replace Expense/Amount divs format. 
+          {/* Expenses div displayed only on mobile screens to replace Expense/Amount divs format.
               visibility rules set in styles/components/_visibility.scss */}
           <div className="show-for-mobile">Expenses</div>
           <div className="show-for-desktop">Expense</div>
@@ -27,16 +28,16 @@ const ExpenseList = (props) => (
                 </div>
             ) : (
             props.expenses.map((expense) => {
-            // instead of spreading props object, spread the passed in expense object (which is the expense from props), 
-            // since the context has changed.
-            return <ExpenseListItem key={expense.id} {...expense} />;
+                // instead of spreading props object, spread the passed in expense object (which is the expense from props),
+                // since the context has changed.
+                return <ExpenseListItem key={expense.id} {...expense} />;
             })
-            )      
+            )
         }
-       </div>       
+       </div>
     </div>
 );
-// This defines what the component has access to in the store and passes the key/values as props to the component 
+// This defines what the component has access to in the store and passes the key/values as props to the component
 // (props on the component connected will = the state object with the key/values specified here).
 const mapStateToProps = (state) => {
     return {

@@ -9,6 +9,8 @@ import Header from '../components/Header';
 // a capital letter.
 // the ...rest operator takes all of the other props not destructured (like path, exact, builtin props provided by ReactRouter etc.)
 // and puts them all in a variable called rest.
+
+// Note: isAuthenticated is from the mapStateToProps connection which checks the logged in status stored in the state for the user
 export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
     //make instance of <Route /> and pass in the rest props (from AppRouter.js) and define the component prop separately
     // with conditional logic in a function.  Pass in the props from Route through to the individual component here:
@@ -35,4 +37,3 @@ const mapStateToProps = (state) => ({
 
 //export by default the connected version of the component:
 export default connect(mapStateToProps)(PrivateRoute);
-

@@ -48,7 +48,7 @@ export const startAddExpense = (expenseData = {}) => {
         // by giving it to the addExpense action generator call:
         // note: ref in the .then arg callback is the snapshot returned by push which is the data that was pushed,
         // so to get the id key assigned by push of the entry, you can access it with .key (ref.key):
-        // (returning this line enables the chaining of more promises/then()s to it)\
+        // ****(returning this line enables the chaining of more promises/then()s to it)****** \\
         // Note: ref arg in the then callback is referring to the expense added to the ref or reference?? it's the same as
         // snapshot maybe - access to the item that was added/updated
         return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {

@@ -4,6 +4,7 @@ import ExpenseForm from './ExpenseForm';
 import { startAddExpense } from '../actions/expenses';
 
 //component converted to class component to avoid inline functions (if it were a stateless functional comp)
+// Note the export of the unconnected version here as well - done for implementing testing.
 export class AddExpensePage extends React.Component {
   /* on valid form submission this expense argument contains an object of all form inputs submitted passed in 
     to the onSubmit method handler on the ExpenseForm.js child component */
@@ -39,6 +40,9 @@ export class AddExpensePage extends React.Component {
 // with mapDispatchToProps, an object is returned with props that call dispatch, so in the component you can just 
 // reference the prop to dispatch the action with prop.[propName holding the dispatch defined below):
 // Note: (dispatch is passed in by connect() which allows access to the redux dispatch method)
+/* The reason for setting this up is not only to make the code more readable, but to make testing easier to implement 
+   mapDispatchToProps abstracts the action functions from the component itself.
+*/
 const mapDispatchToProps = (dispatch) => ({
   // expense arg is a placeholder which will accept a passed in expense object from form data passed in by the component
   startAddExpense: (expense) => dispatch(startAddExpense(expense))

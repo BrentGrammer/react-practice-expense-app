@@ -24,6 +24,7 @@ export default (expenses, { text, sortBy, startDate, endDate }) => {
 
         return startDateMatch && endDateMatch && textMatch;
     }).sort((a, b) => {
+        // for sort if 1 is returned, b comes before a, if -1 is returned a comes before b (returning 0 leaves order unchanged)
         if (sortBy === 'date') {
             return a.createdAt < b.createdAt ? 1 : -1; 
         } else if (sortBy === 'amount') {
