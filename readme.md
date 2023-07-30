@@ -1,5 +1,3 @@
-# Working Link to App Here: [Expensify App](https://react-practice-app.herokuapp.com/) 
-
 ## From Andrew Mead's Udemy Course: [The Complete React Web Developer Course (with Redux)](https://www.udemy.com/react-2nd-edition/)
 
 
